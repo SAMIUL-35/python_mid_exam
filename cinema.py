@@ -18,27 +18,31 @@ class Hall:
         self.__row = row  
         self.__col = col  
         self.__show_list = []  
-        self.__seats = {}  
+        self._seats = {}  
 
     def __repr__(self):
         return f'Hall Number: {self.__hall_no}\n'
 
-    
+    def get_hall_no(self):
+        return self.__hall_no
 
     def entry_show(self, show_id, movie_name, time):
         show = (show_id, movie_name, time)
         self.__show_list.append(show)
 
-        
-        seat_allocation = [[["0" for _ in range(self.__col)]] for _ in range(self.__row)]
+    
+        seat_allocation = [["0" for _ in range(self.__col)] for _ in range(self.__row)]
 
-        
-        self.__seats[show_id] = seat_allocation
+
+        self._seats[show_id] = seat_allocation
+
 
     def book_seats(self, show_id, r, c):
-        if show_id in self.__seats:
+        r -= 1  
+        c -= 1  
+        if show_id in self._seats:
             if 0 <= r < self.__row and 0 <= c < self.__col:
-                seat_allocation = self.__seats[show_id]
+                seat_allocation = self._seats[show_id]
                 if seat_allocation[r][c] == "0":
                     seat_allocation[r][c] = "1"
                     print(f"Seat ({r},{c}) booked for show ID {show_id}.")
@@ -54,10 +58,12 @@ class Hall:
             print(f"Show ID: {sh[0]}, Movie Name: {sh[1]}, Time: {sh[2]}")
 
     def view_available_seats(self, show_id):
-        if show_id in self.__seats:
-            seat_arrangement = self.__seats[show_id]
+      
+        if show_id in self._seats:
+            seat_arrangement = self._seats[show_id]
+            print("Available Seats For id:{show_id}")
             for row in seat_arrangement:
-                print(" ".join(row))
+                print(" ".join(row))  
         else:
             print("No seat arrangement found for this show ID.")
 
@@ -69,7 +75,7 @@ star_cine.entry_hall(112, 5, 5)
 star_cine.entry_hall(111, 5, 5)
 
 
-hall_list = Star_Cinema.get_hall_list()
+hall_list = star_cine.get_hall_list()
 
 hall1 = hall_list[0]
 hall1.entry_show(1, "Inception", "17-9-24 15:00")
@@ -95,7 +101,9 @@ while start:
     op = input('Enter an option: \n')
     
     if op == '1':
-        print("Available Halls:", [hall.get_hall_no() for hall in Star_Cinema.get_hall_list()])
+        if op == '1':
+         print("Available Halls:", [hall.get_hall_no() for hall in hall_list])
+
 
     elif op == '2':
         valid_hall = False
@@ -117,16 +125,20 @@ while start:
             print("2. View Available Seats for a Show")
             print("3. Book Ticket")
             print("4. Back to Main Menu \n")
-            option = input('Enter an option: ')
+            option = input('Enter an option: \n')
 
             if option == '1':
+                print(".............................")                
                 cur_hall.view_show_list()
-
+                print(".............................")    
             elif option == '2':
+                  
                 show_id = int(input('Enter Show ID: '))
                 cur_hall.view_available_seats(show_id)
+                print(".............................")   
 
             elif option == '3':
+                
                 show_id = int(input('Enter Show ID: '))
                 row = int(input('Enter Row: '))
                 col = int(input('Enter Column: '))
