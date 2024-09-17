@@ -104,7 +104,6 @@ while start:
         if op == '1':
          print("Available Halls:", [hall.get_hall_no() for hall in hall_list])
 
-
     elif op == '2':
         valid_hall = False
         while not valid_hall:
@@ -128,7 +127,7 @@ while start:
             option = input('Enter an option: \n')
 
             if option == '1':
-                print(".............................")                
+                                
                 cur_hall.view_show_list()
                 print(".............................")    
             elif option == '2':
