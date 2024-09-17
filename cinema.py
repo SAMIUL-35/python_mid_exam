@@ -45,7 +45,7 @@ class Hall:
                 seat_allocation = self._seats[show_id]
                 if seat_allocation[r][c] == "0":
                     seat_allocation[r][c] = "1"
-                    print(f"Seat ({r},{c}) booked for show ID {show_id}.")
+                    print(f"Seat ({r},{c}) booked for  ID {show_id}.")
                 else:
                     print(f"Seat ({r},{c}) is already booked.")
             else:
@@ -61,7 +61,7 @@ class Hall:
       
         if show_id in self._seats:
             seat_arrangement = self._seats[show_id]
-            print("Available Seats For id:{show_id}")
+            print('Available Seats For id:',show_id)
             for row in seat_arrangement:
                 print(" ".join(row))  
         else:
@@ -102,7 +102,11 @@ while start:
     
     if op == '1':
         if op == '1':
+         print("================================")
+
          print("Available Halls:", [hall.get_hall_no() for hall in hall_list])
+         print("================================")
+
 
     elif op == '2':
         valid_hall = False
@@ -118,30 +122,41 @@ while start:
 
         hall_menu = True
         while hall_menu:
+            print("================================")
+
             print(f"\nHall Number: {cur_hall.get_hall_no()}\n")
+            print("================================")
+
             print("Choose an option:\n")
             print("1. View All Shows Today")
             print("2. View Available Seats for a Show")
             print("3. Book Ticket")
             print("4. Back to Main Menu \n")
+            print("================================")
+
             option = input('Enter an option: \n')
 
             if option == '1':
-                                
+                print("================================")
+                print("ALL SHOWS TODAY\n")
                 cur_hall.view_show_list()
                 print(".............................")    
             elif option == '2':
-                  
+                print("================================")
+  
                 show_id = int(input('Enter Show ID: '))
                 cur_hall.view_available_seats(show_id)
                 print(".............................")   
 
             elif option == '3':
-                
+                print("================================")
+
                 show_id = int(input('Enter Show ID: '))
                 row = int(input('Enter Row: '))
                 col = int(input('Enter Column: '))
+                print("================================")
                 cur_hall.book_seats(show_id, row, col)
+                print("================================")
 
             elif option == '4':
                 hall_menu = False
